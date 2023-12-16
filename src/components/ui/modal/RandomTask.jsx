@@ -1,25 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
-import ChallengeAttribute from '../../challenge/ChallengeAttribute';
+import { useEffect, useState } from 'react';
 import { IoPeople } from 'react-icons/io5';
 import { FaMoneyCheckDollar, FaMountainSun } from 'react-icons/fa6';
-import ChallengeLabel from '../../challenge/ChallengeLabel';
-import { FilledButton } from '../Buttons';
+import { FilledButton } from '@components/ui/Buttons';
 import { useDispatch } from 'react-redux';
-import { activityActions } from '../../../store/activity-slice';
+import { fetchAndTransformRandomActivity } from '@utils/activity-utils';
+import { activityActions } from '@store/activity-slice';
+import ChallengeAttribute from '@components/challenge/ChallengeAttribute';
 
 export default function RandomTask({ close }) {
 	const [activity, setActivity] = useState(null);
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		async function perform() {
-			const res = await axios.get('http://www.boredapi.com/api/activity/');
-			const activity = res.data;
-			console.log(activity);
-			activity.tags = [activity.type];
-			return activity;
+			try {
+				const activity = await fetchAndTransformRandomActivity();
+				setActivity(activity);
+			} catch (error) {
+				console.error('Error fetching activity:', error);
+			}
 		}
-		perform().then((data) => setActivity(data));
+		perform();
 	}, []);
 
 	function acceptTaskHandler() {
@@ -27,6 +28,7 @@ export default function RandomTask({ close }) {
 		dispatch(activityActions.addActivity(activity));
 		close();
 	}
+
 	return (
 		<div className='w-full'>
 			<h1 className='font-medium text-3xl mb-1'>Your Challenge</h1>
@@ -35,27 +37,23 @@ export default function RandomTask({ close }) {
 				'Loading...'
 			) : (
 				<div className='flex flex-col gap-2'>
-					<ChallengeLabel text={activity?.type} color='lime-300' />
-					{/* <img
-						className='h-32 w-32'
-						src={images[activity?.type]?.src}
-						alt={images[activity?.type]?.alt}
-					/> */}
+					{/* Display transformed activity details */}
+					<p>{activity.name}</p>
 					<div>
-						<p className='mb-2'>{activity?.activity}</p>
+						<p className='mb-2'>{activity.activity}</p>
 
 						<div className='grid grid-cols-2 gap-y-1'>
 							<ChallengeAttribute
 								icon={<IoPeople />}
-								content={activity?.participants}
+								content={activity.stats.participants}
 							/>
 							<ChallengeAttribute
 								icon={<FaMoneyCheckDollar />}
-								content={activity?.price}
+								content={activity.stats.price}
 							/>
 							<ChallengeAttribute
 								icon={<FaMountainSun />}
-								content={activity?.accessibility}
+								content={activity.stats.accessibility}
 							/>
 						</div>
 					</div>

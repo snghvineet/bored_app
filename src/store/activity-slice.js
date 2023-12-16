@@ -3,18 +3,27 @@ import { ActivityStatus } from '../utils/tag-utils';
 
 const activitySlice = createSlice({
 	name: 'activities',
-	initialState: { activities: [], filter: null, status: 'IN_PROGRESS' },
+	initialState: {
+		activities: [],
+		filter: null,
+		status: ActivityStatus.IN_PROGRESS,
+	},
 	reducers: {
+		setStatusFilter(state, { payload: status }) {
+			state.status = status;
+		},
 		addActivity(state, { payload }) {
+			payload.tags = [payload.type];
 			payload.status = ActivityStatus.IN_PROGRESS;
 			state.activities.push(payload);
 		},
 		markAsComplete(state, { payload: id }) {
 			const existingActivity = state.activities.find(
-				(activity) => activity.key === id
+				(activity) => activity.id === id
 			);
-			if (!existingActivity) return;
-			existingActivity.status = ActivityStatus.COMPLETED;
+			if (existingActivity) {
+				existingActivity.status = ActivityStatus.COMPLETED;
+			}
 		},
 	},
 });

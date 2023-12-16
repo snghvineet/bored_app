@@ -10,21 +10,20 @@ import { activityActions } from '../../store/activity-slice';
 export default function ActivityItem({ activity }) {
 	const dispatch = useDispatch();
 	const [expanded, setExpanded] = useState(false);
-
 	function changeActivityStatusToComplete() {
-		dispatch(activityActions.markAsComplete(activity.key));
+		dispatch(activityActions.markAsComplete(activity.id));
 	}
 	return (
 		<li>
 			<div className='border-2 rounded-lg px-6 py-3'>
 				<div>
 					<div>
-						<h1 className='text-xl mb-2'>{activity.activity}</h1>
+						<h1 className='text-xl mb-2'>{activity.name}</h1>
 						<div className='flex w-full'>
 							<div className='flex gap-2 flex-grow'>
 								<ChallengeLabel text={activity.status} />
-								{activity.tags.map((tag) => (
-									<ChallengeLabel key={activity.key + tag} text={tag} />
+								{activity.tags?.map((tag) => (
+									<ChallengeLabel key={activity.id + tag} text={tag} />
 								))}
 							</div>
 							<IconButton

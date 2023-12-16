@@ -1,11 +1,13 @@
-import Activities from './components/activities/Activities';
-import Sidebar from './components/ui/sidebar/Sidebar';
+import { Outlet } from 'react-router-dom';
+import Sidebar from '@components/ui/sidebar/Sidebar';
 
 function App() {
 	return (
 		<main className='flex h-full'>
 			<Sidebar />
-			<Activities />
+			<div className='p-3 w-full'>
+				<Outlet />
+			</div>
 		</main>
 	);
 }

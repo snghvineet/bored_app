@@ -29,6 +29,10 @@ export function getColorStyleByTag(tag) {
 		colorStyle.bg = 'bg-green-100';
 		colorStyle.text = 'text-green-600';
 		colorStyle.lead = 'bg-green-600';
+	} else if (tag === ActivityStatus.FAILED) {
+		colorStyle.bg = 'bg-orange-100';
+		colorStyle.text = 'text-orange-600';
+		colorStyle.lead = 'bg-orange-600';
 	}
 
 	return colorStyle;
