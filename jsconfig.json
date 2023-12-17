@@ -6,6 +6,7 @@
       "@utils/*": ["src/utils/*"],
       "@store/*": ["src/store/*"],
       "@pages/*": ["src/pages/*"],
+      "@assets/*": ["src/assets/*"]
       // Add more aliases if needed
     },
     "module": "ES2020",
