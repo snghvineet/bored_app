@@ -32,7 +32,6 @@ function AuthPage() {
 		provider.addScope('profile');
 		await signInWithRedirect(auth, provider);
 		const userCredentials = await getRedirectResult(auth);
-		// const credential = GoogleAuthProvider.credentialFromResult(userCredentials);
 		dipatch(authActions.login(getAuthenticatedUser(userCredentials.user)));
 	}
 
@@ -41,7 +40,7 @@ function AuthPage() {
 		{ label: 'Password', type: 'password' },
 	];
 	return (
-		<div className='w-full flex bg-neutral-100'>
+		<div className='w-full flex h-full bg-neutral-100'>
 			<div className='flex-grow' />
 			<form
 				onSubmit={handleSubmit(formSubmitHandler)}
