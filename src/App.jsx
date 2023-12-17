@@ -6,7 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase.config';
 import AuthPage from '@components/auth/Auth';
 import { getAuthenticatedUser } from '@utils/auth-utils';
-import { useLoaderData } from 'react-router-dom';
+import { Player } from '@lottiefiles/react-lottie-player';
 import MainLoadingPage from '@pages/MainLoadingPage';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
 			} else {
 				dispatch(authActions.logout());
 			}
-			setLoading(false);
+			// setLoading(false);
 		});
 	}, [dispatch]);
 	const content = user ? <HomePage /> : <AuthPage />;
