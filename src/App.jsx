@@ -22,7 +22,7 @@ function App() {
 			} else {
 				dispatch(authActions.logout());
 			}
-			// setLoading(false);
+			setLoading(false);
 		});
 	}, [dispatch]);
 	const content = user ? <HomePage /> : <AuthPage />;
