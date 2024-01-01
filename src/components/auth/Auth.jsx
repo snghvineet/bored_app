@@ -41,10 +41,10 @@ function AuthPage() {
 	];
 	return (
 		<div className='w-full flex h-full bg-neutral-100'>
-			<div className='flex-grow' />
+			<div className='flex-grow hidden' />
 			<form
 				onSubmit={handleSubmit(formSubmitHandler)}
-				className='flex flex-col gap-2 w-2/5 bg-white m-3 rounded-lg px-32 py-24 shadow'
+				className='flex flex-col gap-2 w-full bg-white md:m-3 rounded-lg px-8 md:px-32 py-24 shadow'
 			>
 				<div className='flex flex-col items-center mb-12'>
 					<div>

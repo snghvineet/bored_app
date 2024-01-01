@@ -41,7 +41,7 @@ export default function ActivitiesPage() {
 			)}
 			<div className='flex justify-between'>
 				<Tabbar tabs={tabs} activeTab={tabIndex} handler={changeTabHandler} />
-				<div className='flex gap-4 px-4 py-2'>
+				<div className='gap-4 px-4 py-2 hidden md:flex'>
 					<FilledButton
 						variant='secondary'
 						icon={<LuSwords />}

@@ -20,10 +20,13 @@ export function FilledButton({ children, icon, variant, onClick, className }) {
 	);
 }
 
-export function IconButton({ children, onClick, text }) {
+export function IconButton({ children, onClick, text, className }) {
 	return (
 		<button
-			className='flex h-8 justify-center items-center gap-2 font-medium'
+			className={twMerge(
+				'flex h-8 justify-center items-center gap-2 font-medium',
+				className
+			)}
 			onClick={onClick}
 			type='button'
 		>
